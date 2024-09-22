@@ -20,4 +20,8 @@ export class CarbonEmissionFactorsService {
   ): Promise<CarbonEmissionFactor[] | null> {
     return this.carbonEmissionFactorRepository.save(carbonEmissionFactor);
   }
+
+  findByNameAndUnit(name: string, unit: string): Promise<CarbonEmissionFactor | null> {
+    return this.carbonEmissionFactorRepository.findOne({where: {name, unit}});
+  }
 }
