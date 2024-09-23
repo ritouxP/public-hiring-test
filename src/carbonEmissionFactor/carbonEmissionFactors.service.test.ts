@@ -37,6 +37,17 @@ describe("CarbonEmissionFactors.service", () => {
     const carbonEmissionFactors = await carbonEmissionFactorService.findAll();
     expect(carbonEmissionFactors).toHaveLength(1);
   });
+  it("should retrieve emission Factor by name and unit", async () => {
+    const carbonEmissionFactor = await carbonEmissionFactorService.findByNameAndUnit(
+      "oliveOil", "kg"
+    );
+    expect(carbonEmissionFactor?.name).toBe("oliveOil");
+  });
+
+  it("should not retrive emission if unit is not matching", async () => {
+    const carbonEmissionFactor = await carbonEmissionFactorService.findByNameAndUnit("oliveOil", "g");
+    expect(carbonEmissionFactor).toBeNull();
+  });
 });
 
 afterAll(async () => {
